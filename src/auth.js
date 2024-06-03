@@ -50,7 +50,7 @@ export const {
        const user= await User.findOne({
         email: credentials?.email
        })
-
+       await localStorage.setItem("userID",user._id);
        console.log(user);
        if(user){
 
@@ -83,7 +83,7 @@ export const {
           let {email, name, id}= user;
           await dbConnect();
           console.log("in google sign in after connecting");
-
+          
           let alreadyUser= await User.findOne({email});
           
           if(!alreadyUser){

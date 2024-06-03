@@ -22,6 +22,18 @@ const userSchema= new Schema({
     type:Boolean,
     default:false,
   },
+  PendingAppointments:[
+    {
+      type:mongoose.Types.ObjectId,
+      ref:'Appointment',
+    }
+  ],
+  MyAppointments:[
+    {
+      type:mongoose.Types.ObjectId,
+      ref:'Appointment',
+    }
+  ]
 
 },{timestamps:true})
 
