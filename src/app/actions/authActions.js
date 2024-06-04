@@ -9,14 +9,6 @@ export async function doSocialLogin(formData){
   let action = formData.get('action')
   console.log(action);
   await signIn(action,{redirectTo:"/"})
-
-  if(action=="google"){
-    console.log(action);
-  }
-  if(action=="github"){
-    console.log(action);
-  }
-
 }
 
 export async function doSocialLogout(formData){

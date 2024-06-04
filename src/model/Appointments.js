@@ -31,7 +31,11 @@ const appointmentSchema= new mongoose.Schema({
   isStarred:{
     type:Boolean,
     default:false,
-  }
+  },
+  isAccepted:{
+    type:Boolean,
+    default:false,
+  },
 })
 
 export const Appointment = mongoose.models.Appointment ?? mongoose.model("Appointment", appointmentSchema)

@@ -61,12 +61,14 @@
 
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import SocialLogin from "../socialLogin/SocialLogin"; // Adjust the import path as necessary
+import SocialLogin from "../socialLogin/SocialLogin"; // Adjust the import path as necessary\
+
 
 function RegistrationForm() {
   const router = useRouter();
+  let [error, setError] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -87,10 +89,12 @@ function RegistrationForm() {
         alert("User created successfully");
         router.push('/login');
       } else {
+        console.log(error);
         alert("Failed to create user");
         console.error("Failed to create user", await response.text());
       }
     } catch (error) {
+      setError(error)
       console.error("Error:", error);
     }
   }
@@ -101,6 +105,7 @@ function RegistrationForm() {
       <div className="bg-white flex flex-col justify-center items-center shadow-lg rounded-lg p-8 h-[90vh] max-w-md min-w-[300px] w-full flex-shrink-0">
         <div className="flex flex-col justify-center items-center h-full mb-6">
           <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+          {error && <h3 className="text-red-500 text-center mb-4">{error}</h3>}
           <form onSubmit={handleSubmit} className="space-y-6 w-full">
             <div>
               <label htmlFor="name" className="block text-gray-700">Name</label>

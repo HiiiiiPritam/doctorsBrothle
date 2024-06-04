@@ -50,10 +50,11 @@ export const {
        const user= await User.findOne({
         email: credentials?.email
        })
-       await localStorage.setItem("userID",user._id);
        console.log(user);
        if(user){
-
+          if(!user.password){
+            throw new Error("Earlier you logged in using some providers by this email, please use providers")
+          }
         const isMatch= await bcrypt.compare(credentials.password, user.password);
 
         if(isMatch){
@@ -78,9 +79,11 @@ export const {
       console.log("in google sign in out ");
       console.log(account);
       if(account?.provider === "google"){
-        console.log("in google sign in ");
         try {
+          console.log("in google sign in ");
           let {email, name, id}= user;
+          console.log("in google sign in extrA");
+
           await dbConnect();
           console.log("in google sign in after connecting");
           
@@ -90,7 +93,6 @@ export const {
             let temp={
               name,
               email,
-              password:"default"
             }
             console.log("in google sign in almost done ");
             await createUser(temp)

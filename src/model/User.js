@@ -33,6 +33,18 @@ const userSchema= new Schema({
       type:mongoose.Types.ObjectId,
       ref:'Appointment',
     }
+  ],
+  AcceptedAppointments:[
+    {
+      type:mongoose.Types.ObjectId,
+      ref:'Appointment',
+    }
+  ],
+  followers:[
+    {
+      type:mongoose.Types.ObjectId,
+      ref:'User',
+    }
   ]
 
 },{timestamps:true})
