@@ -1,3 +1,4 @@
+
 import { auth } from "@/auth";
 import HomeComp from "@/components/calls/Loaded";
 import ProfileComp from "@/components/dashboardComponents/ProfileComp";
@@ -5,6 +6,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
+
+  
   let session = await auth();
   let user = session?.user;
 

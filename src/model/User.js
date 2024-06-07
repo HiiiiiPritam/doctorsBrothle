@@ -45,7 +45,16 @@ const userSchema= new Schema({
       type:mongoose.Types.ObjectId,
       ref:'User',
     }
-  ]
+  ],
+  ////changes for cloudinary
+  image:{
+    id:{
+      type:String
+    },
+    url:{
+      type:String
+    }
+  }
 
 },{timestamps:true})
 

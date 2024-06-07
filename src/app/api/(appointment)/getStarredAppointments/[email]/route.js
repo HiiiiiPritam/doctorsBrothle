@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-// Adjust the import path as necessary
-
 import { dbConnect } from '@/utils/dbConnect';
 import { User } from '@/model/User';
-import { Appointment } from '@/model/Appointments';
 
 export const GET = async (req, { params }) => {
   const { email } = params;
@@ -34,16 +31,21 @@ export const GET = async (req, { params }) => {
       });
     }
 
+    // Filter starred appointments
+    const starredAppointments = [
+      ...foundUser.MyAppointments.filter(appointment => appointment.isStarred),
+      ...foundUser.AcceptedAppointments.filter(appointment => appointment.isStarred),
+      ...foundUser.PendingAppointments.filter(appointment => appointment.isStarred),
+    ];
+
     return NextResponse.json({
       message: "User found",
       success: true,
-      user: foundUser,
+      starredAppointments,
     }, {
       status: 200,
     });
   } catch (error) {
-    console.log("I am here 4");
-
     return NextResponse.json({
       message: error.message,
       success: false,
